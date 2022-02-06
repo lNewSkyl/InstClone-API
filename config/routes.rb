@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  # devise_for :users
   namespace 'api' do
-    namespace 'v1' do 
+    namespace 'v1' do
+      resources :users, param: :_username
+      post '/auth/login', to: 'authentication#login'
       resources :posts
-      resources :sessions, only: [:create, :destroy]
     end
   end
 end
