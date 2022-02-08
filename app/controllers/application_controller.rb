@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+  include UserHelper
+  
+  private
 
   def not_found
     render json: { error: 'not_found' }

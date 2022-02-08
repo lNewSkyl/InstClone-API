@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserHelper
   has_secure_password
   # mount_uploader :avatar, AvatarUploader
   validates :email, presence: true, uniqueness: true
