@@ -6,7 +6,7 @@ module Api
       # POST /auth/login
       def login
         if user&.authenticate(params[:password])
-          token = Authentication.new(user).call
+          token = Authenticator.call(user)
           if token
             render json: { token: token, username: user_name(user) }
           else

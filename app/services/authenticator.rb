@@ -1,4 +1,4 @@
-class Authentication
+class Authenticator < ApplicationService
   def initialize(user)
     @user = user
   end
