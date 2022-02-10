@@ -44,7 +44,7 @@ module Api
       private
 
       def post_params
-        params.permit(:title, :body)
+        params.permit(:title, :body, {post_attachment: []})
       end
       
     end
