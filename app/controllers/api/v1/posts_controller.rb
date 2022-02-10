@@ -44,7 +44,11 @@ module Api
       private
 
       def post_params
-        params.permit(:title, :body, {post_attachment: []})
+        params.permit(
+          :title, 
+          :body, 
+          {post_attachment: []}
+          )
       end
       
       def find_post

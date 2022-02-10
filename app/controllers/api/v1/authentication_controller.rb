@@ -18,7 +18,10 @@ module Api
       private
 
       def login_params
-        params.permit(:email, :password)
+        params.permit(
+          :email, 
+          :password
+          )
       end
 
       def user
