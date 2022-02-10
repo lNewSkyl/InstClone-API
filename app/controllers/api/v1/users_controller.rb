@@ -12,7 +12,7 @@ module Api
 
       # GET /users/{username}
       def show
-        render json: @user, status: :ok
+        render json: @user, status: :ok 
       end
 
       # POST /users
@@ -49,7 +49,7 @@ module Api
 
       def user_params
         params.permit(
-          :name, :username, :email, :password, :password_confirmation
+          :name, :username, :email, :password, :password_confirmation, :user_image
         )
       end
     end
