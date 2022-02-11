@@ -9,5 +9,5 @@ class User < ApplicationRecord
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
   has_many :posts, dependent: :destroy
-  has_many :likes
+  has_many :likes, dependent: :destroy
 end
