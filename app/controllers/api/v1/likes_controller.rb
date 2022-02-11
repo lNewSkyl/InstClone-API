@@ -6,6 +6,10 @@ module Api
       SUCCESS_STATUS = 'SUCCESS'.freeze
       ERROR_STATUS = 'ERROR'.freeze
 
+      def index
+        render json: @post.likes
+      end
+
       def create
         if already_liked?
           render json: { message: "ALREADY LIKED!!!", status: ERROR_STATUS, data: @like }, status: :ok
@@ -31,7 +35,7 @@ module Api
       end
 
       def find_post
-        @post = Post.find(params [:post_id])
+        @post = Post.find(params[:post_id])
       end
 
       def already_liked?
