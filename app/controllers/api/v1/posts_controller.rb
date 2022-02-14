@@ -26,7 +26,7 @@ module Api
       def destroy
         if @post
           @post.destroy
-          render json: { status: SUCCESS_STATUS, data: @post }, status: :ok
+          render json: { data: Post.all, status: SUCCESS_STATUS }, status: :ok
         else 
           render json: { status: ERROR_STATUS, data: @post }, status: :ok
         end
@@ -47,6 +47,7 @@ module Api
         params.permit(
           :title, 
           :body, 
+          :id,
           {post_attachment: []}
           )
       end
