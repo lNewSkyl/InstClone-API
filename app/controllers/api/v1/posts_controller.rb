@@ -7,37 +7,37 @@ module Api
 
       def index
         @posts = Post.order('created_at DESC')
-        render json: { status: SUCCESS_STATUS, data: @posts }, status: :ok
+        render json: @posts, status: :ok
       end
 
       def show
-        render json: { status: SUCCESS_STATUS, data: @post }, status: :ok
+        render json: @post, status: :ok
       end
 
       def create
         @post = Post.new(post_params)
         if @post.save
-          render json: { status: SUCCESS_STATUS, data: @post }, status: :ok
+          render json: @post, status: :ok
         else
-          render json: { status: ERROR_STATUS, data: @post.errors }, status: :unprocessable_entity
+          render json: @post.errors, status: :unprocessable_entity
         end
       end
 
       def destroy
         if @post
           @post.destroy
-          render json: { data: Post.all, status: SUCCESS_STATUS }, status: :ok
+          render json: Post.all, status: :ok
         else 
-          render json: { status: ERROR_STATUS, data: @post }, status: :ok
+          render json: @post, status: :ok
         end
       end
 
       def update
         if @post
           @post.update(post_params)
-          render json: { status: SUCCESS_STATUS, data: @post }, status: :ok
+          render json: @post, status: :ok
         else
-          render json: { status: ERROR_STATUS, data: @post }, status: :unprocessable_entity
+          render json: @post, status: :unprocessable_entity
         end
       end
 
