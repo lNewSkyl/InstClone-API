@@ -9,5 +9,5 @@ Rails.application.routes.draw do
     end
   end
   root 'api/v1/posts#index'
-  get 'api/v1/', to: redirect('.')
+
 end

@@ -26,7 +26,7 @@ module Api
       def destroy
         if @post
           @post.destroy
-          render json: Post.all, status: :ok
+          render json: Post.order('created_at DESC'), status: :ok
         else 
           render json: @post, status: :ok
         end
@@ -44,12 +44,7 @@ module Api
       private
 
       def post_params
-        params.permit(
-          :title, 
-          :body, 
-          :id,
-          {post_attachment: []}
-          )
+        params.require(:post).permit(:title, :body, :id, {post_attachment: []})
       end
       
       def find_post
