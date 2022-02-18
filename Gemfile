@@ -17,9 +17,12 @@ gem "carrierwave"
 gem "redis"
 gem "redis-rails"
 gem "sidekiq"
+gem "fast_jsonapi"
+gem "actionpack", ">= 7.0.2.2"
+
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", ">= 5.6.2"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"

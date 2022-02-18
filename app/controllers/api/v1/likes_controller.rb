@@ -1,7 +1,7 @@
 module Api
   module V1
     class LikesController < ApplicationController
-      before_action :find_post
+      before_action :post
       before_action :find_like, only: [:destroy]
       SUCCESS_STATUS = 'SUCCESS'.freeze
       ERROR_STATUS = 'ERROR'.freeze
@@ -12,15 +12,15 @@ module Api
 
       def create
         if already_liked?
-          render json: { message: "ALREADY LIKED!!!", status: ERROR_STATUS, data: @like }, status: :ok
+          render json: { message: "ALREADY LIKED!!!", status: ERROR_STATUS, data: like }, status: :ok
         else
           @post.likes.create(user_id: current_user.id)
-          render json: { message: "LIKED!!!", status: SUCCESS_STATUS, data: @like }, status: :ok
+          render json: { message: "LIKED!!!", status: SUCCESS_STATUS, data: like }, status: :ok
         end
       end
 
       def destroy
-        if !(already_liked?)
+        if @like.blank?
           render json: { message: "CANNOT UNLIKE!!!", status: ERROR_STATUS, data: @like }, status: :ok
         else
           @like.destroy
@@ -34,8 +34,8 @@ module Api
         params.permit(:post_id)
       end
 
-      def find_post
-        @post = Post.find(params[:post_id])
+      def post
+        @post ||= Post.find(params[:post_id])
       end
 
       def already_liked?
@@ -44,7 +44,7 @@ module Api
       end
 
       def find_like
-         @like = @post.likes.find(params[:id])
+         @like = post.likes.find(params[:id])
       end
     end
   end 

@@ -5,24 +5,16 @@ module Api
 
       # POST /auth/login
       def login
-        if user&.authenticate(params[:password])
-          token = Authenticator.call(user)
-          if token
-            render json: { token: token, username: user_name(user) }
-          else
-            render json: { error: 'unauthorized' }
-          end
+        token = Authenticator.call(user, params[:password])
+        if token
+          render json: { token: token, username: user_name(user) }
+        else
+          render json: { error: 'unauthorized' }
         end
       end
 
       private
 
-      def login_params
-        params.permit(
-          :email, 
-          :password
-          )
-      end
 
       def user
         @user = User.find_by_email(params[:email])

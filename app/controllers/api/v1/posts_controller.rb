@@ -6,8 +6,8 @@ module Api
       before_action :find_post, only: [:show, :destroy, :update]
 
       def index
-        @posts = Post.order('created_at DESC')
-        render json: @posts, status: :ok
+        posts = Post.order('created_at DESC')
+        render json: posts, status: :ok
       end
 
       def show
@@ -15,18 +15,18 @@ module Api
       end
 
       def create
-        @post = Post.new(post_params)
-        if @post.save
-          render json: @post, status: :ok
+        post = Post.new(post_params)
+        if post.save
+          render json: post, status: :ok
         else
-          render json: @post.errors, status: :unprocessable_entity
+          render json: post.error, status: :unprocessable_entity
         end
       end
 
       def destroy
         if @post
           @post.destroy
-          render json: Post.order('created_at DESC'), status: :ok
+          render json: { massage: "Post was deleted", posts: Post.order('created_at DESC') }, status: :ok
         else 
           render json: @post, status: :ok
         end
@@ -48,7 +48,8 @@ module Api
       end
       
       def find_post
-        @post = Post.find(params[:id])
+        @post ||= Post.find(params[:id])
+        render json: { error: 'Answer not found' } unless @post
       end
     end
   end 
